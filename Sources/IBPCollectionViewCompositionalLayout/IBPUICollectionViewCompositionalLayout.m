@@ -136,7 +136,7 @@
         return;
     }
 
-    if (!self.collectionViewDelegate && collectionView.delegate != self) {
+    if (collectionView.collectionViewLayout == self && !self.collectionViewDelegate && collectionView.delegate != self) {
         self.collectionViewDelegate = collectionView.delegate;
         collectionView.delegate = self;
     }
@@ -849,7 +849,7 @@
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
-    return [self.collectionViewDelegate respondsToSelector:aSelector] || [super respondsToSelector:aSelector];
+    return [self.collectionViewDelegate respondsToSelector:aSelector] || [UICollectionViewLayout instancesRespondToSelector:aSelector];
 }
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
